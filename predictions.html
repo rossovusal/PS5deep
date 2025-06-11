@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAD TO PS5 - PROQNOZLAR</title>
+    <style>
+        :root {
+            --main-yellow: #FFD600;
+            --main-black: #181818;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--main-yellow) 45%, var(--main-black) 100%);
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--main-black);
+            color: var(--main-yellow);
+            padding: 22px 24px;
+            border-bottom: 4px solid var(--main-yellow);
+            flex-wrap: wrap;
+        }
+        .header .logo {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        .header .user-block {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+        .header .username {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border-radius: 7px;
+            padding: 6px 18px;
+            font-size: 1.1rem;
+            font-weight: normal;
+        }
+        .header .dashboard-btn-top {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .dashboard-btn-top:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .header .logout-btn {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .logout-btn:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .container {
+            max-width: 680px;
+            margin: 38px auto 0 auto;
+            padding: 25px 10px 20px 10px;
+            background: rgba(24,24,24,0.97);
+            border-radius: 18px;
+            box-shadow: 0 6px 32px #18181822;
+        }
+        h2 {
+            color: var(--main-yellow);
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 25px;
+            margin-top: 8px;
+        }
+        .proqnoz-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .proqnoz-table th, .proqnoz-table td {
+            text-align: center;
+            font-size: 1.03rem;
+            padding: 8px 6px;
+            border-bottom: 1.5px solid #FFD60066;
+        }
+        /* HEADER (adlar olan üst sətrə xüsusi dizayn) */
+        .proqnoz-table th {
+            background: var(--main-black);      /* içi tam qara */
+            color: #fff;                        /* yazı ağ */
+            border-top: 4px solid var(--main-yellow); /* yuxarı sarı xətt */
+            border-bottom: 1.5px solid #FFD60066;
+            position: relative;
+        }
+        .proqnoz-table tr td {
+            background: #fffdfa;
+            color: #181818;
+        }
+        .proqnoz-table tr:last-child td {
+            border-bottom: none;
+        }
+        .proqnoz-table td:first-child {
+            font-weight: bold;
+            color: var(--main-black);
+            background: #FFE066;
+        }
+        .user-my {
+            background: #FFD600;
+            color: #181818;
+            border-radius: 7px;
+            padding: 5px 10px;
+            font-weight: bold;
+        }
+        .hidden-cell {
+            color: #FFD600;
+            letter-spacing: 1px;
+            font-size: 1.05rem;
+        }
+        .info-msg {
+            color: #ff5252;
+            text-align: center;
+            margin: 8px 0 8px 0;
+            font-size: 0.98rem;
+        }
+        @media (max-width: 600px) {
+            .container { max-width: 99vw; padding: 10px 2px; }
+            h2 { font-size: 1.1rem;}
+            .proqnoz-table th, .proqnoz-table td { font-size: 0.97rem; padding: 5px 2px; }
+        }
+        @media (max-width: 480px) {
+            .header .logo { font-size: 1rem;}
+            .header .username { font-size: 0.82rem; padding: 3px 6px;}
+            .proqnoz-table th, .proqnoz-table td { font-size: 0.82rem; padding: 3px 1px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ROAD TO <span style="color:#181818;background:#FFD600;padding:1px 8px;border-radius:8px;">PS5</span></div>
+        <div class="user-block">
+            <div class="username" id="userDisplay"></div>
+            <button class="dashboard-btn-top" onclick="gotoDashboard()">ANA SƏHİFƏ</button>
+            <button class="logout-btn" onclick="logout()">ÇIXIŞ</button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>PROQNOZLAR</h2>
+        <div id="infoMsg" class="info-msg"></div>
+        <table class="proqnoz-table" id="proqnozTable">
+            <!-- Dinamik doldurulacaq -->
+        </table>
+    </div>
+    <script>
+        // İstifadəçi yoxlaması
+        let username = localStorage.getItem('ps5_loggedin');
+        let users = JSON.parse(localStorage.getItem('ps5_users') || '[]');
+        let me = users.find(u => u.username === username);
+        if (!username || !me) window.location.href = "login.html";
+        document.getElementById("userDisplay").innerText = username;
+
+        function logout() {
+            localStorage.removeItem('ps5_loggedin');
+            window.location.href = "login.html";
+        }
+        function gotoDashboard() {
+            window.location.href = "index.html";
+        }
+
+        // Cədvəl üçün məlumatlar
+        let games = JSON.parse(localStorage.getItem('ps5_games') || '[]');
+        let allUsers = users.map(u => u.username);
+
+        // Taymer bitib-bitmədiyini yoxlamaq üçün
+        let turStartTime = localStorage.getItem('ps5_tur_start');
+        let turDuration = 48 * 60 * 60; // 48 saat saniyə
+        function getRemainingSeconds() {
+            if (!turStartTime) return turDuration;
+            let elapsed = Math.floor((Date.now() - parseInt(turStartTime,10))/1000);
+            return Math.max(0, turDuration - elapsed);
+        }
+        let timerEnded = getRemainingSeconds() === 0;
+
+        // Başlıq
+        let table = document.getElementById('proqnozTable');
+        let header = '<tr><th>OYUN</th>';
+        for (let u of allUsers) {
+            header += '<th'+(u===username?' class="user-my"':'')+'>' + u + '</th>';
+        }
+        header += '</tr>';
+        table.innerHTML = header;
+
+        // Info mesajı
+        let infoMsg = document.getElementById("infoMsg");
+        if (!timerEnded) {
+            infoMsg.innerText = "Digər iştirakçıların proqnozları 48 saatlıq müddət bitdikdən sonra açıq görünəcək.";
+        } else {
+            infoMsg.innerText = "";
+        }
+
+        // Proqnozlar
+        for (let i = 0; i < games.length; ++i) {
+            let row = '<tr>';
+            row += '<td>' + games[i][0] + ' – ' + games[i][1] + '</td>';
+            for (let u of allUsers) {
+                let pred = JSON.parse(localStorage.getItem('ps5_tur_pred_' + u) || '[]');
+                let sent = localStorage.getItem('ps5_tur_pred_' + u + '_sent') === "true";
+                if (u === username || timerEnded) {
+                    row += '<td>' + (sent ? (pred[i]||"-") : "—") + '</td>';
+                } else {
+                    row += '<td class="hidden-cell">—</td>';
+                }
+            }
+            row += '</tr>';
+            table.innerHTML += row;
+        }
+    </script>
+</body>
+</html>

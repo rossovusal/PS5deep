@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAD TO PS5 - PIPEPROQNOZ</title>
+    <style>
+        :root {
+            --main-yellow: #FFD600;
+            --main-black: #181818;
+            --red: #E53935;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--main-yellow) 45%, var(--main-black) 100%);
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--main-black);
+            color: var(--main-yellow);
+            padding: 22px 24px;
+            border-bottom: 4px solid var(--main-yellow);
+            flex-wrap: wrap;
+        }
+        .header .logo {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        .header .user-block {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+        .header .username {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border-radius: 7px;
+            padding: 6px 18px;
+            font-size: 1.1rem;
+            font-weight: normal;
+        }
+        .header .dashboard-btn-top {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .dashboard-btn-top:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .header .logout-btn {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .logout-btn:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .container {
+            max-width: 600px;
+            margin: 38px auto 0 auto;
+            padding: 25px 10px 20px 10px;
+            background: rgba(24,24,24,0.97);
+            border-radius: 18px;
+            box-shadow: 0 6px 32px #18181822;
+        }
+        h2 {
+            color: var(--main-yellow);
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 25px;
+            margin-top: 8px;
+        }
+        .pp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        .pp-inputs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .pp-input, .pp-dropdown {
+            padding: 10px 8px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 1.5px solid #FFD600;
+            background: #fff;
+            color: #181818;
+            outline: none;
+        }
+        .pp-dropdown {
+            min-width: 72px;
+        }
+        .pp-btn {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border: none;
+            padding: 12px 34px;
+            border-radius: 10px;
+            font-size: 1.08rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.14s, color 0.14s;
+        }
+        .pp-btn:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .pp-close-btn {
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 12px 34px;
+            border-radius: 10px;
+            font-size: 1.08rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background 0.14s;
+        }
+        .pp-close-btn:disabled {
+            background: #ffb3b3;
+            color: #fff;
+            cursor: not-allowed;
+        }
+        .info-msg {
+            color: #FFD600;
+            text-align: center;
+            margin: 12px 0 8px 0;
+            font-size: 0.98rem;
+        }
+        .pp-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+            background: #fffdfa;
+        }
+        .pp-table th, .pp-table td {
+            text-align: center;
+            font-size: 1.02rem;
+            padding: 8px 5px;
+            border-bottom: 1.5px solid #FFD60066;
+        }
+        .pp-table th {
+            background: #181818;
+            color: #fff;
+            border: 2px solid #FFD600;
+        }
+        .pp-table tr:last-child td {
+            border-bottom: none;
+        }
+        .pp-result-select {
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 1.01rem;
+        }
+        .pp-result-select[disabled] {
+            background: #f2f2f2;
+        }
+        .pp-calc-btn {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border: none;
+            padding: 10px 40px;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: background 0.13s;
+        }
+        .pp-calc-btn:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+        @media (max-width: 600px) {
+            .container { max-width: 99vw; padding: 10px 2px; }
+            h2 { font-size: 1.1rem;}
+            .pp-input, .pp-dropdown { font-size: 0.98rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ROAD TO <span style="color:#181818;background:#FFD600;padding:1px 8px;border-radius:8px;">PS5</span></div>
+        <div class="user-block">
+            <div class="username" id="userDisplay"></div>
+            <button class="dashboard-btn-top" onclick="gotoDashboard()">ANA SƏHİFƏ</button>
+            <button class="logout-btn" onclick="logout()">ÇIXIŞ</button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>PIPEPROQNOZ</h2>
+        <div class="info-msg" id="infoMsg"></div>
+        <form id="ppForm" class="pp-form">
+            <div class="pp-inputs">
+                <input type="text" id="ppInput" class="pp-input" placeholder="Proqnozunu daxil et" maxlength="32" required>
+                <select id="ppDropdown" class="pp-dropdown"></select>
+            </div>
+            <button type="submit" class="pp-btn" id="ppSendBtn">PİPEPROQNOZU GÖNDƏR</button>
+        </form>
+        <button class="pp-close-btn" id="ppCloseBtn">PİPEPROQNOZU BAĞLA</button>
+        <div id="ppTableDiv"></div>
+    </div>
+    <!-- Modal for password and security code -->
+    <div id="modal" style="display:none;position:fixed;z-index:2000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.33);align-items:center;justify-content:center;">
+        <div style="background:#fff;padding:32px 20px 24px 20px;border-radius:13px;box-shadow:0 8px 40px #18181844;max-width:320px;width:92vw;display:flex;flex-direction:column;align-items:center;">
+            <div id="modalMsg" style="font-size:1.15rem;font-weight:normal;color:#181818;margin-bottom:14px;text-align:center;">
+                Şifrəni daxil edin:
+            </div>
+            <input type="password" id="modalInput" style="font-size:1.15rem;padding:8px 10px;border-radius:7px;border:1.5px solid #ffd600;width:100%;outline:none;margin-bottom:13px;" placeholder="Şifrə">
+            <button id="modalOkBtn" style="background:#FFD600;color:#181818;border:none;border-radius:8px;font-size:1.07rem;padding:7px 24px;cursor:pointer;">Təsdiqlə</button>
+            <button id="modalCancelBtn" style="background:none;color:#333;border:none;margin-top:7px;font-size:0.95rem;cursor:pointer;">İmtina</button>
+            <div id="modalError" style="color:#c62828;margin-top:9px;font-size:0.93rem;display:none"></div>
+        </div>
+    </div>
+    <script>
+        // İstifadəçi yoxlaması
+        let username = localStorage.getItem('ps5_loggedin');
+        let users = JSON.parse(localStorage.getItem('ps5_users') || '[]');
+        let me = users.find(u => u.username === username);
+        if (!username || !me) window.location.href = "login.html";
+        document.getElementById("userDisplay").innerText = username;
+
+        function logout() {
+            localStorage.removeItem('ps5_loggedin');
+            window.location.href = "login.html";
+        }
+        function gotoDashboard() {
+            window.location.href = "index.html";
+        }
+
+        // Pipeproqnozlar bağlanıbsa (aktivlik yoxlanır)
+        let ppLocked = localStorage.getItem('ps5_pp_locked') === "true";
+
+        // İştirakçının maksimum xal limiti
+        let totalScores = JSON.parse(localStorage.getItem('ps5_total_scores') || '{}');
+        let myMax = Math.min(100, totalScores[username] || 1);
+
+        // Dropdown hazırlığı
+        let dropdown = document.getElementById("ppDropdown");
+        dropdown.innerHTML = "";
+        for (let i = 1; i <= myMax; i++) {
+            dropdown.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+
+        // Əvvəl göndəribsə...
+        let myPP = JSON.parse(localStorage.getItem('ps5_pp_' + username) || 'null');
+        let mySent = localStorage.getItem('ps5_pp_' + username + '_sent') === "true";
+
+        let form = document.getElementById("ppForm");
+        let ppInput = document.getElementById("ppInput");
+        let ppSendBtn = document.getElementById("ppSendBtn");
+        let ppCloseBtn = document.getElementById("ppCloseBtn");
+        let infoMsg = document.getElementById("infoMsg");
+
+        // Modal
+        let modal = document.getElementById("modal");
+        let modalInput = document.getElementById("modalInput");
+        let modalOkBtn = document.getElementById("modalOkBtn");
+        let modalCancelBtn = document.getElementById("modalCancelBtn");
+        let modalMsg = document.getElementById("modalMsg");
+        let modalError = document.getElementById("modalError");
+        let modalCallback = null;
+
+        function openModal(msg, cb) {
+            modalMsg.innerText = msg;
+            modalInput.value = "";
+            modalError.style.display = "none";
+            modal.style.display = "flex";
+            modalCallback = cb;
+            setTimeout(() => modalInput.focus(), 100);
+        }
+        function closeModal() {
+            modal.style.display = "none";
+            modalCallback = null;
+        }
+        modalOkBtn.onclick = function() {
+            if (modalCallback) modalCallback(modalInput.value);
+        };
+        modalCancelBtn.onclick = closeModal;
+        modalInput.addEventListener('keyup', function(e) {
+            if (e.key === "Enter") modalOkBtn.click();
+        });
+
+        function refreshFormState() {
+            if (ppLocked) {
+                form.style.display = "none";
+                ppCloseBtn.disabled = true;
+            } else if (mySent) {
+                form.style.display = "none";
+                ppCloseBtn.disabled = false;
+                infoMsg.innerText = "Pipeproqnozunuz qəbul olundu!";
+            } else {
+                form.style.display = "flex";
+                ppCloseBtn.disabled = false;
+                infoMsg.innerText = "";
+                if (myPP) {
+                    ppInput.value = myPP.text;
+                    dropdown.value = myPP.point;
+                }
+            }
+        }
+        refreshFormState();
+
+        // Proqnozu göndər
+        form.onsubmit = function(e) {
+            e.preventDefault();
+            let text = ppInput.value.trim();
+            let point = dropdown.value;
+            if (!text) {
+                infoMsg.innerText = "Proqnoz xanasi boş qala bilməz!";
+                return;
+            }
+            // Modal şifrə
+            openModal("Hesab şifrənizi daxil edin:", function(val) {
+                if (val !== me.password) {
+                    modalError.innerText = "Şifrə yanlışdır!";
+                    modalError.style.display = "block";
+                    return;
+                }
+                localStorage.setItem('ps5_pp_' + username, JSON.stringify({text, point}));
+                localStorage.setItem('ps5_pp_' + username + '_sent', "true");
+                mySent = true;
+                myPP = {text, point};
+                closeModal();
+                refreshFormState();
+                infoMsg.innerText = "Pipeproqnoz qəbul olundu!";
+            });
+        };
+
+        // Bağla düyməsi
+        ppCloseBtn.onclick = function() {
+            openModal("Təhlükəsizlik kodunu daxil edin:", function(val) {
+                if (val !== "Baku2025!") {
+                    modalError.innerText = "Kod yalnışdır!";
+                    modalError.style.display = "block";
+                    return;
+                }
+                localStorage.setItem('ps5_pp_locked', "true");
+                ppLocked = true;
+                closeModal();
+                refreshFormState();
+                renderPPTable();
+            });
+        };
+
+        // Əgər bağlanıbsa, cədvəl çıxır
+        function renderPPTable() {
+            let allPPs = [];
+            for (let u of users) {
+                let pp = JSON.parse(localStorage.getItem('ps5_pp_' + u.username) || 'null');
+                allPPs.push({
+                    username: u.username,
+                    text: pp ? pp.text : "",
+                    point: pp ? pp.point : "",
+                });
+            }
+            let html = `<table class="pp-table"><tr><th>Sıra</th><th>İştirakçı</th><th>Pipeproqnoz</th><th>Gediş</th><th>Nəticə</th></tr>`;
+            allPPs.forEach((pp, i) => {
+                html += `<tr>
+                    <td>${i+1}</td>
+                    <td>${pp.username}</td>
+                    <td>${pp.text}</td>
+                    <td>${pp.point}</td>
+                    <td>
+                        <select class="pp-result-select" id="res_${pp.username}">
+                            <option value="">Seç...</option>
+                            <option value="true">Doğru</option>
+                            <option value="false">Yanlış</option>
+                        </select>
+                    </td>
+                </tr>`;
+            });
+            html += `</table>
+            <button class="pp-calc-btn" id="ppCalcBtn">PİPEPROQNOZLARI HESABLA</button>`;
+            document.getElementById("ppTableDiv").innerHTML = html;
+
+            // Hesabla
+            document.getElementById("ppCalcBtn").onclick = function() {
+                openModal("Təhlükəsizlik kodunu daxil edin:", function(val) {
+                    if (val !== "Baku2025!") {
+                        modalError.innerText = "Kod yalnışdır!";
+                        modalError.style.display = "block";
+                        return;
+                    }
+                    // Hesabla və turnir cədvəlinə əlavə/çıx
+                    let totalScores = JSON.parse(localStorage.getItem('ps5_total_scores') || '{}');
+                    for (let u of users) {
+                        let res = document.getElementById("res_" + u.username).value;
+                        let pp = JSON.parse(localStorage.getItem('ps5_pp_' + u.username) || 'null');
+                        let point = pp && pp.point ? parseInt(pp.point) : 0;
+                        if (res === "true") {
+                            totalScores[u.username] = (totalScores[u.username] || 0) + point;
+                        } else if (res === "false") {
+                            totalScores[u.username] = (totalScores[u.username] || 0) - point;
+                            if (totalScores[u.username] < 0) totalScores[u.username] = 0;
+                        }
+                    }
+                    localStorage.setItem('ps5_total_scores', JSON.stringify(totalScores));
+                    closeModal();
+                    document.getElementById("ppTableDiv").innerHTML = "<div style='color:#27ae60;text-align:center;margin:30px;font-size:1.22rem'>Pipeproqnozlar uğurla hesablandı!</div>";
+                });
+            };
+            // Bütün nəticə dropdown-ları bir yerdə yığılır
+            document.querySelectorAll('.pp-result-select').forEach(sel=>{
+                sel.disabled = false;
+            });
+        }
+        if (ppLocked) renderPPTable();
+    </script>
+</body>

@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAD TO PS5 - Ana Səhifə</title>
+    <style>
+        :root {
+            --main-yellow: #FFD600;
+            --main-black: #181818;
+            --input-bg: #232323;
+            --danger-red: #F44336;
+            --danger-hover: #c62828;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--main-yellow) 38%, var(--main-black) 100%);
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--main-black);
+            color: var(--main-yellow);
+            padding: 22px 24px;
+            border-bottom: 4px solid var(--main-yellow);
+            flex-wrap: wrap;
+        }
+        .header .logo {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        .header .user-block {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+        .header .username {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border-radius: 7px;
+            padding: 6px 18px;
+            font-size: 1.1rem;
+            font-weight: normal;
+        }
+        .header .dashboard-btn-top {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .dashboard-btn-top:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .header .logout-btn {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .logout-btn:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .dashboard {
+            max-width: 650px;
+            margin: 38px auto 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            padding-bottom: 35px;
+        }
+        .dashboard-btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 18px;
+            width: 100%;
+            background: var(--main-black);
+            color: var(--main-yellow);
+            border: none;
+            border-radius: 13px;
+            padding: 20px 18px;
+            font-size: 1.06rem;
+            letter-spacing: 2px;
+            margin-bottom: 2px;
+            box-shadow: 0 2px 18px #18181815;
+            cursor: pointer;
+            transition: background 0.18s, color 0.16s;
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+        .dashboard-btn span {
+            font-size: 1.35rem;
+            width: 32px;
+            display: inline-block;
+            text-align: center;
+        }
+        .dashboard-btn:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .dashboard-btn.danger {
+            background: var(--danger-red);
+            color: #fff;
+            border: 2px solid #fff2;
+            font-weight: normal;
+        }
+        .dashboard-btn.danger:hover {
+            background: var(--danger-hover);
+            color: #fff;
+        }
+        @media (max-width: 900px) {
+            .dashboard {
+                max-width: 96vw;
+                gap: 16px;
+            }
+        }
+        @media (max-width: 700px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+                max-width: 99vw;
+                padding: 0 2vw;
+                gap: 14px;
+            }
+        }
+        @media (max-width: 550px) {
+            .header { padding: 11px 4px; font-size:0.95rem; }
+            .header .logo { font-size: 1.09rem;}
+            .header .username { font-size: 0.90rem; padding: 5px 8px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ROAD TO <span style="color:#181818;background:#FFD600;padding:1px 8px;border-radius:8px;">PS5</span></div>
+        <div class="user-block">
+            <div class="username" id="userDisplay"></div>
+            <button class="dashboard-btn-top" onclick="gotoDashboard()">ANA SƏHİFƏ</button>
+            <button class="logout-btn" onclick="logout()">ÇIXIŞ</button>
+        </div>
+    </div>
+    <div class="dashboard">
+        <button class="dashboard-btn" onclick="navigate('participants.html')"><span>👥</span>İŞTİRAKÇILAR</button>
+        <button class="dashboard-btn" onclick="navigate('draw.html')"><span>📅</span>APARICI CƏDVƏLİ</button>
+        <button class="dashboard-btn" onclick="navigate('games.html')"><span>🏟️</span>OYUNLAR</button>
+        <button class="dashboard-btn" onclick="navigate('round.html')"><span>🎯</span>TUR</button>
+        <button class="dashboard-btn" onclick="navigate('predictions.html')"><span>📋</span>PROQNOZLAR</button>
+        <button class="dashboard-btn" onclick="navigate('results.html')"><span>✅</span>OYUN NƏTİCƏLƏRİ</button>
+        <button class="dashboard-btn" onclick="navigate('standings.html')"><span>🏆</span>TURNİR CƏDVƏLİ</button>
+        <button class="dashboard-btn" onclick="navigate('pipe.html')"><span>🔮</span>PİPEPROQNOZ</button>
+        <button class="dashboard-btn" onclick="navigate('rules.html')"><span>📑</span>QAYDALAR</button>
+        <button class="dashboard-btn danger" onclick="navigate('reset.html')"><span>🧹</span>TURNİRİ SIFIRLA</button>
+    </div>
+
+    <script>
+        // İstifadəçi yoxlaması
+        let username = localStorage.getItem('ps5_loggedin');
+        if (!username) window.location.href = "login.html";
+        document.getElementById("userDisplay").innerText = username;
+
+        function logout() {
+            localStorage.removeItem('ps5_loggedin');
+            window.location.href = "login.html";
+        }
+        function gotoDashboard() {
+            window.location.href = "dashboard.html";
+        }
+        function navigate(page) {
+            // Sonra səhifələr hazır olduqda dəyişəcək
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

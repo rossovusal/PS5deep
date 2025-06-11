@@ -1,0 +1,299 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAD TO PS5 - İştirakçılar</title>
+    <style>
+        :root {
+            --main-yellow: #FFD600;
+            --main-black: #181818;
+            --table-header-bg: #FFD600;
+            --table-row-bg: #fffdfa;
+            --table-border: #FFD60066;
+            --danger-red: #F44336;
+            --danger-hover: #c62828;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--main-yellow) 45%, var(--main-black) 100%);
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--main-black);
+            color: var(--main-yellow);
+            padding: 22px 24px;
+            border-bottom: 4px solid var(--main-yellow);
+            flex-wrap: wrap;
+        }
+        .header .logo {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        .header .user-block {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+        .header .username {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border-radius: 7px;
+            padding: 6px 18px;
+            font-size: 1.1rem;
+            font-weight: normal;
+        }
+        .header .dashboard-btn-top {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .dashboard-btn-top:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .header .logout-btn {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .logout-btn:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .container {
+            max-width: 420px;
+            margin: 38px auto 0 auto;
+            padding: 25px 10px 20px 10px;
+            background: rgba(24,24,24,0.97);
+            border-radius: 18px;
+            box-shadow: 0 6px 32px #18181822;
+        }
+        h2 {
+            color: var(--main-yellow);
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 25px;
+            margin-top: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+        thead th {
+            background: var(--table-header-bg);
+            color: var(--main-black);
+            font-size: 1.04rem;
+            padding: 10px 0;
+            border-radius: 10px 10px 0 0;
+        }
+        tbody td {
+            background: var(--table-row-bg);
+            color: var(--main-black);
+            font-size: 1.04rem;
+            text-align: center;
+            padding: 10px 0;
+            border-bottom: 1.5px solid var(--table-border);
+        }
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .btn-section {
+            text-align: center;
+        }
+        .draw-btn {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border: none;
+            padding: 14px 44px;
+            border-radius: 11px;
+            font-size: 1.11rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            margin-top: 5px;
+            font-weight: normal;
+            box-shadow: 0 3px 15px #ffd6002d;
+            transition: background 0.18s, color 0.18s;
+        }
+        .draw-btn:disabled {
+            background: #ccc;
+            color: #444;
+            cursor: not-allowed;
+        }
+        .info-msg {
+            color: #ff5252;
+            text-align: center;
+            margin: 13px 0 0 0;
+            font-size: 0.98rem;
+            display: none;
+        }
+        @media (max-width: 900px) {
+            .container { max-width: 96vw; }
+            .header { padding: 16px 7px; }
+            .header .logo { font-size: 1.2rem;}
+        }
+        @media (max-width: 600px) {
+            .container { max-width: 98vw; }
+            h2 { font-size: 1.2rem;}
+        }
+        @media (max-width: 550px) {
+            .header .logo { font-size: 1.09rem;}
+            .header .username { font-size: 0.90rem; padding: 5px 8px;}
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ROAD TO <span style="color:#181818;background:#FFD600;padding:1px 8px;border-radius:8px;">PS5</span></div>
+        <div class="user-block">
+            <div class="username" id="userDisplay"></div>
+            <button class="dashboard-btn-top" onclick="gotoDashboard()">ANA SƏHİFƏ</button>
+            <button class="logout-btn" onclick="logout()">ÇIXIŞ</button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>İŞTİRAKÇILAR</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>AD</th>
+                </tr>
+            </thead>
+            <tbody id="usersTable">
+                <!-- Dinamik olaraq doldurulacaq -->
+            </tbody>
+        </table>
+        <div class="btn-section">
+            <button class="draw-btn" id="drawBtn">PÜŞK AT</button>
+            <div id="infoMsg" class="info-msg"></div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="modal" style="display:none;position:fixed;z-index:2000;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.33);align-items:center;justify-content:center;">
+        <div style="background:#fff;padding:32px 20px 24px 20px;border-radius:13px;box-shadow:0 8px 40px #18181844;max-width:320px;width:92vw;display:flex;flex-direction:column;align-items:center;">
+            <div style="font-size:1.15rem;font-weight:normal;color:#181818;margin-bottom:14px;text-align:center;">
+                Təhlükəsizlik kodunu daxil et:
+            </div>
+            <input type="password" id="secureInput" style="font-size:1.15rem;padding:8px 10px;border-radius:7px;border:1.5px solid #ffd600;width:100%;outline:none;margin-bottom:13px;" placeholder="Təhlükəsizlik kodu">
+            <button id="modalOkBtn" style="background:#FFD600;color:#181818;border:none;border-radius:8px;font-size:1.07rem;padding:7px 24px;cursor:pointer;">Təsdiqlə</button>
+            <button id="modalCancelBtn" style="background:none;color:#333;border:none;margin-top:7px;font-size:0.95rem;cursor:pointer;">İmtina</button>
+            <div id="modalError" style="color:#c62828;margin-top:9px;font-size:0.93rem;display:none"></div>
+        </div>
+    </div>
+    <script>
+        // İstifadəçi yoxlaması
+        let username = localStorage.getItem('ps5_loggedin');
+        if (!username) window.location.href = "login.html";
+        document.getElementById("userDisplay").innerText = username;
+
+        function logout() {
+            localStorage.removeItem('ps5_loggedin');
+            window.location.href = "login.html";
+        }
+        function gotoDashboard() {
+            window.location.href = "index.html";
+        }
+
+        // --- İstifadəçilər və püşk statusu ---
+        let users = JSON.parse(localStorage.getItem('ps5_users') || '[]');
+        let drawDone = localStorage.getItem('ps5_draw_done') === "true";
+        let table = document.getElementById("usersTable");
+        let drawBtn = document.getElementById("drawBtn");
+        let infoMsg = document.getElementById("infoMsg");
+
+        function fillTable() {
+            table.innerHTML = '';
+            if (users.length === 0) {
+                table.innerHTML = '<tr><td colspan="2" style="color:#aaa;font-size:1rem;">Hələ qeydiyyat yoxdur</td></tr>';
+                drawBtn.disabled = true;
+                return;
+            }
+            users.forEach((u, i) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td>${i+1}</td><td>${u.username}</td>`;
+                table.appendChild(tr);
+            });
+            drawBtn.disabled = drawDone;
+        }
+        fillTable();
+
+        // Modal açılıb-bağlanması
+        function openModal() {
+            document.getElementById("modal").style.display = "flex";
+            document.getElementById("secureInput").value = '';
+            document.getElementById("modalError").style.display = "none";
+            setTimeout(() => document.getElementById("secureInput").focus(), 150);
+        }
+        function closeModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        // Düymə klik
+        drawBtn.onclick = () => {
+            if (users.length < 2) {
+                infoMsg.innerText = "Ən azı 2 iştirakçı olmalıdır!";
+                infoMsg.style.display = "block";
+                setTimeout(()=> infoMsg.style.display='none', 2100);
+                return;
+            }
+            openModal();
+        };
+
+        // Modal düymələri
+        document.getElementById("modalOkBtn").onclick = function() {
+            let val = document.getElementById("secureInput").value;
+            if (val !== "Baku2025!") {
+                document.getElementById("modalError").innerText = "Kod yalnışdır!";
+                document.getElementById("modalError").style.display = "block";
+                return;
+            }
+            // Püşk atıldı!
+            let shuffled = [...users].sort(() => Math.random() - 0.5);
+            let fourRounds = [];
+            for (let i=0; i<4; ++i) fourRounds = fourRounds.concat(shuffled);
+            localStorage.setItem('ps5_draw_done', "true");
+            localStorage.setItem('ps5_draw_list', JSON.stringify(fourRounds.map(u=>u.username)));
+            drawBtn.disabled = true;
+            closeModal();
+            infoMsg.innerText = "Püşk atıldı! APARICI CƏDVƏLİ səhifəsinə baxın.";
+            infoMsg.style.display = "block";
+        };
+        document.getElementById("modalCancelBtn").onclick = closeModal;
+
+        // Sıfırlama üçün (TURNİRİ SIFIRLA düyməsi vurulduqda):
+        window.addEventListener("storage", function(event) {
+            if (event.key === "ps5_draw_done" && event.newValue === null) {
+                drawDone = false;
+                drawBtn.disabled = false;
+            }
+        });
+
+        // Səhifə yüklənəndə yoxla
+        if (drawDone) drawBtn.disabled = true;
+    </script>
+</body>
+</html>

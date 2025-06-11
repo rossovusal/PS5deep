@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAD TO PS5 - Giriş</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-yellow: #FFD600;
+            --main-black: #181818;
+            --input-bg: #232323;
+            --input-border: #444;
+            --button-hover: #ffea00;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--main-yellow) 40%, var(--main-black) 100%);
+            font-family: 'Montserrat', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-container {
+            background: rgba(24, 24, 24, 0.98);
+            border-radius: 18px;
+            padding: 42px 30px 30px 30px;
+            box-shadow: 0 4px 32px rgba(24, 24, 24, 0.28);
+            max-width: 350px;
+            width: 100%;
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .logo span {
+            color: var(--main-yellow);
+            font-weight: 700;
+            font-size: 2.1rem;
+            letter-spacing: 1.5px;
+        }
+        .input-group {
+            margin-bottom: 24px;
+        }
+        label {
+            color: #eee;
+            font-size: 1rem;
+            margin-bottom: 7px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid var(--input-border);
+            border-radius: 7px;
+            background: var(--input-bg);
+            color: #fff;
+            font-size: 1.07rem;
+            outline: none;
+            transition: border 0.18s;
+        }
+        input:focus {
+            border-color: var(--main-yellow);
+        }
+        .login-btn {
+            width: 100%;
+            background: var(--main-yellow);
+            color: var(--main-black);
+            padding: 13px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.14rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: background 0.17s;
+            box-shadow: 0 2px 10px #ffd60044;
+        }
+        .login-btn:hover {
+            background: var(--button-hover);
+        }
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #ccc;
+            font-size: 0.97rem;
+        }
+        .register-link a {
+            color: var(--main-yellow);
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.16s;
+        }
+        .register-link a:hover {
+            color: #fff;
+        }
+        .error-message {
+            color: #ff5252;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 0.98rem;
+            display: none;
+        }
+        @media (max-width: 480px) {
+            .login-container {
+                max-width: 95vw;
+                padding: 24px 7vw 26px 7vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <span>ROAD TO <span style="color:#181818;background:#FFD600;padding:1px 8px;border-radius:8px;">PS5</span></span>
+        </div>
+        <div id="errorMsg" class="error-message"></div>
+        <form id="loginForm" autocomplete="off">
+            <div class="input-group">
+                <label for="username">İstifadəçi adı</label>
+                <input type="text" id="username" name="username" required maxlength="20" autocomplete="username">
+            </div>
+            <div class="input-group">
+                <label for="password">Şifrə</label>
+                <input type="password" id="password" name="password" required maxlength="32" autocomplete="current-password">
+            </div>
+            <button type="submit" class="login-btn">GİRİŞ</button>
+        </form>
+        <div class="register-link">
+            Hesabın yoxdur? <a href="register.html">Qeydiyyatdan keç</a>
+        </div>
+    </div>
+
+    <script>
+        // Demo məqsədilə localStorage-dan istifadə (sonra backend-ə qoşulacaq)
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+
+            // Local storage-da yoxla (test üçün). Sonra backend ilə əvəzlənəcək!
+            let users = JSON.parse(localStorage.getItem('ps5_users') || '[]');
+            let user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                // Giriş uğurlu, ana səhifəyə yönləndir
+                localStorage.setItem('ps5_loggedin', username);
+                window.location.href = 'index.html'; // ANA SƏHİFƏ üçün fayl olacaq
+            } else {
+                document.getElementById('errorMsg').innerText = 'İstifadəçi adı və ya şifrə yalnışdır!';
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        });
+
+        // Error message yox olsun input dəyişəndə
+        document.querySelectorAll('input').forEach(inp => {
+            inp.addEventListener('input', () => {
+                document.getElementById('errorMsg').style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

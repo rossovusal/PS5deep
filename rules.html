@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAD TO PS5 - Qaydalar</title>
+    <style>
+        :root {
+            --main-yellow: #FFD600;
+            --main-black: #181818;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--main-yellow) 45%, var(--main-black) 100%);
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--main-black);
+            color: var(--main-yellow);
+            padding: 22px 24px;
+            border-bottom: 4px solid var(--main-yellow);
+            flex-wrap: wrap;
+        }
+        .header .logo {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        .header .user-block {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+        .header .dashboard-btn-top {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .dashboard-btn-top:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .container {
+            max-width: 670px;
+            margin: 38px auto 0 auto;
+            padding: 25px 18px 25px 18px;
+            background: rgba(24,24,24,0.97);
+            border-radius: 18px;
+            box-shadow: 0 6px 32px #18181822;
+        }
+        h2 {
+            color: var(--main-yellow);
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 25px;
+            margin-top: 8px;
+        }
+        .rules {
+            color: #fff;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            margin-top: 18px;
+        }
+        .rules-list {
+            margin: 0 0 0 20px;
+            padding: 0;
+        }
+        .rules-list li {
+            margin-bottom: 16px;
+        }
+        .highlight {
+            color: var(--main-yellow);
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            .container { max-width: 99vw; padding: 10px 4px;}
+            h2 { font-size: 1.15rem;}
+            .rules { font-size: 0.96rem;}
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ROAD TO <span style="color:#181818;background:#FFD600;padding:1px 8px;border-radius:8px;">PS5</span></div>
+        <div class="user-block">
+            <button class="dashboard-btn-top" onclick="gotoDashboard()">ANA SƏHİFƏ</button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>QAYDALAR</h2>
+        <div class="rules">
+            <p><span class="highlight">ROAD TO PS5</span> – 2013-cü ildən keçirilən və Elçin Abışovun müəllifi olduğu “Faceball” turnirinin reqlamenti əsasında hazırlanmış futbol həvəskarlarını bir araya toplayan futbol proqnoz oyunudur.</p>
+            <ol class="rules-list">
+                <li>İştirakçı olmaq üçün sistemdə qeydiyyatdan keçmək lazımdır.</li>
+                <li>Qeydiyyatdan keçmiş iştirakçı turniri sonadək oynamalıdır və yalnız çox üzrlü səbəblər olduqda onun iştirakına xitam verilə bilər. İştirakçı, həmçinin öz profilini turnirin ortasında başqa bir iştirakçıya da təqdim edə bilər. Həmin iştirakçı turniri onun adı ilə davam etdirmək hüququna sahibdir.</li>
+                <li>Turnir 10 ay davam edir: sentyabr ayında başlayır və İyun ayında yekunlaşır.</li>
+                <li>Turnirdə 10 iştirakçı mübarizə aparır və hər bir iştirakçı hər ayın 1-də iştirak haqqı ödəyir. 2025-2026-cı il mövsümü üçün iştirak haqqı 7 AZN təşkil edir.</li>
+                <li>İştirak haqqı əvvəlcədən təyin edilmiş kart hesabına köçürülür və bununla mükafat fondu formalaşır. Ümumilikdə, mükafat fondu iki hissədən ibarətdir:
+                    <ul>
+                        <li><b>Yığış:</b> 700 AZN</li>
+                        <li><b>Proporsional bölgü əsasında toplanan yekun vəsait:</b> 250 AZN</li>
+                        <li><b>Ümumi:</b> 950 AZN</li>
+                    </ul>
+                </li>
+                <li>Turnir 4 dövrə və 40 turdan ibarətdir. Hər iştirakçı 4 dəfə tur aparıcısı olur. Aparıcıların turlarının vaxtları əvvəlcədən müəyyən edilir və Aparıcı Cədvəli səhifəsində əks olunur. Burada heç bir dəyişiklik etmək mümkün deyil. Aparıcı təyin olunduğu vaxtda turu keçirməzsə (oyunları seçməzsə), hesabından 25 xal çıxılır. Bu hal növbəti dəfə təkrarlandıqda iştirakçının hesabından daha 25 xal silinir.</li>
+            </ol>
+        </div>
+    </div>
+    <script>
+        function gotoDashboard() {
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>
+
+

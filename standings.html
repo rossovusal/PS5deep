@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROAD TO PS5 - TURNİR CƏDVƏLİ</title>
+    <style>
+        :root {
+            --main-yellow: #FFD600;
+            --main-black: #181818;
+            --success: #27ae60;
+            --error: #c0392b;
+            --neutral: #FFD600;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--main-yellow) 45%, var(--main-black) 100%);
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--main-black);
+            color: var(--main-yellow);
+            padding: 22px 24px;
+            border-bottom: 4px solid var(--main-yellow);
+            flex-wrap: wrap;
+        }
+        .header .logo {
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+        .header .user-block {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+        .header .username {
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border-radius: 7px;
+            padding: 6px 18px;
+            font-size: 1.1rem;
+            font-weight: normal;
+        }
+        .header .dashboard-btn-top {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .dashboard-btn-top:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .header .logout-btn {
+            background: #fff;
+            color: var(--main-black);
+            border: none;
+            border-radius: 8px;
+            padding: 7px 16px;
+            font-size: 1rem;
+            font-weight: normal;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: background 0.16s;
+        }
+        .header .logout-btn:hover {
+            background: var(--main-yellow);
+            color: var(--main-black);
+        }
+        .container {
+            max-width: 800px;
+            margin: 38px auto 0 auto;
+            padding: 25px 10px 20px 10px;
+            background: rgba(24,24,24,0.97);
+            border-radius: 18px;
+            box-shadow: 0 6px 32px #18181822;
+        }
+        h2 {
+            color: var(--main-yellow);
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 25px;
+            margin-top: 8px;
+        }
+        .section-title {
+            color: var(--main-yellow);
+            font-size: 1.14rem;
+            font-weight: bold;
+            margin: 30px 0 12px 0;
+        }
+        .table-main {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            background: #fffdfa;
+        }
+        .table-main th, .table-main td {
+            text-align: center;
+            font-size: 1.02rem;
+            padding: 8px 5px;
+            border-bottom: 1.5px solid #FFD60066;
+        }
+        .table-main th {
+            background: #181818;
+            color: #fff;
+            border: 2px solid #FFD600;
+        }
+        .table-main tr:last-child td {
+            border-bottom: none;
+        }
+        .emsallar-block {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .emsal-square {
+            display: inline-block;
+            min-width: 32px;
+            padding: 4px 7px;
+            background: var(--main-yellow);
+            color: var(--main-black);
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.02rem;
+            margin: 1px 2px;
+            border: 1px solid #ddd;
+        }
+        .change-up {
+            color: var(--success);
+            font-size: 1.25em;
+            vertical-align: middle;
+        }
+        .change-down {
+            color: var(--error);
+            font-size: 1.25em;
+            vertical-align: middle;
+        }
+        .change-equal {
+            color: var(--neutral);
+            font-size: 1.25em;
+            vertical-align: middle;
+        }
+        .info-msg {
+            color: #FFD600;
+            text-align: center;
+            margin: 16px 0 12px 0;
+            font-size: 0.98rem;
+        }
+        @media (max-width: 600px) {
+            .container { max-width: 99vw; padding: 12px 1px; }
+            h2 { font-size: 1.15rem;}
+            .table-main th, .table-main td { font-size: 0.92rem; padding: 5px 2px; }
+            .emsal-square { min-width: 23px; font-size: 0.97rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">ROAD TO <span style="color:#181818;background:#FFD600;padding:1px 8px;border-radius:8px;">PS5</span></div>
+        <div class="user-block">
+            <div class="username" id="userDisplay"></div>
+            <button class="dashboard-btn-top" onclick="gotoDashboard()">ANA SƏHİFƏ</button>
+            <button class="logout-btn" onclick="logout()">ÇIXIŞ</button>
+        </div>
+    </div>
+    <div class="container">
+        <h2>TURNİR CƏDVƏLİ</h2>
+        <div id="infoMsg" class="info-msg"></div>
+        <div class="section-title">Cari Turun Nəticələri</div>
+        <table class="table-main" id="currentTour"></table>
+        <div class="section-title">Ümumi Turnir Cədvəli</div>
+        <table class="table-main" id="totalTour"></table>
+    </div>
+    <script>
+        // İstifadəçi yoxlaması
+        let username = localStorage.getItem('ps5_loggedin');
+        let users = JSON.parse(localStorage.getItem('ps5_users') || '[]');
+        let me = users.find(u => u.username === username);
+        if (!username || !me) window.location.href = "login.html";
+        document.getElementById("userDisplay").innerText = username;
+
+        function logout() {
+            localStorage.removeItem('ps5_loggedin');
+            window.location.href = "login.html";
+        }
+        function gotoDashboard() {
+            window.location.href = "index.html";
+        }
+
+        // Oyun nəticələri və proqnozlar
+        let results = JSON.parse(localStorage.getItem('ps5_results') || '[]');
+        let games = JSON.parse(localStorage.getItem('ps5_games_last') || '[]');
+        let allUsers = users.map(u => u.username);
+
+        // Keçmiş turnir xalları və yerlər (yer dəyişiklikləri üçün)
+        let prevScores = JSON.parse(localStorage.getItem('ps5_total_scores_prev') || '{}');
+        let prevOrder = JSON.parse(localStorage.getItem('ps5_total_order_prev') || '{}');
+
+        // 1. Cari Turun Nəticələri (xal hesablanması, əmsallar)
+        let predictions = {};
+        let correctCount = {};
+        let emsallar = {};
+        let scores = {};
+        let resultVariants = {}; // oyun üzrə seçilən variantların sayı
+
+        // Hazırlıq
+        for (let u of allUsers) {
+            predictions[u] = JSON.parse(localStorage.getItem('ps5_tur_pred_' + u) || '[]');
+            correctCount[u] = 0;
+            emsallar[u] = [];
+            scores[u] = 0;
+        }
+        // Hər oyun üçün variantların sayı (əmsal)
+        for (let i=0; i<results.length; ++i) {
+            let countForVar = {};
+            for (let u of allUsers) {
+                let pred = predictions[u][i] || '';
+                if (pred) countForVar[pred] = (countForVar[pred]||0) + 1;
+            }
+            resultVariants[i] = countForVar;
+        }
+        // Cari tur nəticələri və əmsallar
+        for (let u of allUsers) {
+            for (let i=0; i<results.length; ++i) {
+                if (!results[i]) continue;
+                if (predictions[u][i] === results[i]) {
+                    correctCount[u]++;
+                    let ems = resultVariants[i][results[i]];
+                    emsallar[u].push(ems);
+                }
+            }
+        }
+
+        // Cari turun yer sıralaması və yekun xal hesablanması
+        let resultArr = allUsers.map(u=>({
+            username: u,
+            correct: correctCount[u],
+            emsals: emsallar[u],
+            score: 0 // Sonra hesablanacaq
+        }));
+
+        // Xal qaydası
+        function calcTourScores(list) {
+            // 1 - 9, 2 - 8, ... 10 - 0
+            let order = [...list].sort((a,b)=>b.correct-a.correct);
+            // Əmsal sıralaması (xallar bərabərsə)
+            for (let i=0; i<order.length-1; ++i) {
+                if (order[i].correct === order[i+1].correct) {
+                    // Əmsal müqayisəsi: daha çox "min" əmsal üstün
+                    let minEmsI = Math.min(...(order[i].emsals.length ? order[i].emsals : [9999]));
+                    let minEmsJ = Math.min(...(order[i+1].emsals.length ? order[i+1].emsals : [9999]));
+                    if (minEmsI > minEmsJ) {
+                        let tmp = order[i];
+                        order[i] = order[i+1];
+                        order[i+1] = tmp;
+                    }
+                }
+            }
+            // Minimum 3 düzgün olmasa, xal 0
+            let points = [9,8,7,6,5,4,3,2,1,0];
+            let idx = 0;
+            let last = -1, lastidx = -1;
+            while (idx < order.length) {
+                let same = [order[idx]];
+                let sameCnt = 1;
+                // Bərabər nəticələr
+                while (idx+sameCnt<order.length && order[idx].correct === order[idx+sameCnt].correct) {
+                    same.push(order[idx+sameCnt]);
+                    sameCnt++;
+                }
+                // Əmsallar bərabərdirsə, orta bal
+                let allSame = same.every(a=>JSON.stringify(a.emsals)===JSON.stringify(same[0].emsals));
+                let realPoint = (points.slice(idx, idx+sameCnt).reduce((a,b)=>a+b,0)) / sameCnt;
+                for (let s of same) {
+                    if (s.correct>=3) s.score = realPoint;
+                    else s.score = 0;
+                }
+                idx += sameCnt;
+            }
+            return order;
+        }
+        let currentOrder = calcTourScores(resultArr);
+
+        // Cədvəli qur
+        function renderCurrentTourTable() {
+            let html = "<tr><th>Yer</th><th>İştirakçı</th><th>Tapılan oyun sayı</th><th>Əmsallar</th><th>Yekun xal</th></tr>";
+            currentOrder.forEach((item,i) => {
+                html += `<tr>
+                    <td>${i+1}</td>
+                    <td>${item.username}</td>
+                    <td>${item.correct}</td>
+                    <td><span class="emsallar-block">${item.emsals.map(e=>`<span class="emsal-square">${e}</span>`).join('')}</span></td>
+                    <td>${item.score}</td>
+                </tr>`;
+            });
+            document.getElementById("currentTour").innerHTML = html;
+        }
+        renderCurrentTourTable();
+
+        // Turnir xalları — cəmlə
+        let totalScores = JSON.parse(localStorage.getItem('ps5_total_scores') || '{}');
+        for (let item of currentOrder) {
+            totalScores[item.username] = (totalScores[item.username] || 0) + (item.score||0);
+        }
+        localStorage.setItem('ps5_total_scores', JSON.stringify(totalScores));
+
+        // Turnir sıralaması
+        let totalOrder = Object.entries(totalScores).map(([username,score]) => ({username,score}));
+        totalOrder.sort((a,b)=>b.score-a.score);
+
+        // Dəyişiklikləri hesablamaq üçün əvvəlki sıralama saxlanır
+        let newOrderObj = {};
+        totalOrder.forEach((item,i)=>{ newOrderObj[item.username]=i+1; });
+        localStorage.setItem('ps5_total_order_prev', JSON.stringify(newOrderObj));
+        localStorage.setItem('ps5_total_scores_prev', JSON.stringify(totalScores));
+
+        // İkon: yuxarı, aşağı, bərabər
+        function placeChangeIcon(user, idx) {
+            let prevIdx = prevOrder[user];
+            if (prevIdx === undefined) return "";
+            if (prevIdx > idx+1) return '<span class="change-up">&#8593;</span>'; // yuxarı yaşıl ox
+            if (prevIdx < idx+1) return '<span class="change-down">&#8595;</span>'; // aşağı qırmızı ox
+            return '<span class="change-equal">&#61;</span>'; // bərabərlik sarı
+        }
+
+        function renderTotalTourTable() {
+            let html = "<tr><th>Yer</th><th>Dəyişiklik</th><th>İştirakçı</th><th>Yekun xal</th></tr>";
+            totalOrder.forEach((item,i) => {
+                html += `<tr>
+                    <td>${i+1}</td>
+                    <td>${placeChangeIcon(item.username, i)}</td>
+                    <td>${item.username}</td>
+                    <td>${item.score}</td>
+                </tr>`;
+            });
+            document.getElementById("totalTour").innerHTML = html;
+        }
+        renderTotalTourTable();
+
+        // Cari turun oyunları və nəticələri sıfırlananda bu məlumatları yenilə
+        // Əgər növbəti tur başlayırsa, localStorage-dan yalnız total_scores saxlanılır
+
+        // Info
+        if (!results.length) {
+            document.getElementById("infoMsg").innerText = "Cari turun nəticələri əlavə edilməyib.";
+            document.getElementById("currentTour").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
