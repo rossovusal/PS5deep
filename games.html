@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="az">
 <head>
@@ -179,6 +178,12 @@
             font-size: 0.98rem;
             display: none;
         }
+        .status-msg {
+            color: white;
+            text-align: center;
+            margin: 13px 0 0 0;
+            font-size: 0.98rem;
+        }
         @media (max-width: 600px) {
             .container { max-width: 98vw; }
             h2 { font-size: 1.2rem;}
@@ -327,33 +332,34 @@
         };
 
         document.getElementById("modalOkBtn").onclick = function() {
-    let val = document.getElementById("secureInput").value;
-    if (val !== me.password) {
-        document.getElementById("modalError").innerText = "Şifrə yalnışdır!";
-        document.getElementById("modalError").style.display = "block";
-        return;
-    }
-    let vals = [];
-    table.querySelectorAll('tr').forEach((tr) => {
-        let inps = tr.querySelectorAll('.team-input');
-        vals.push([inps[0].value.trim(), inps[1].value.trim()]);
-    });
-    localStorage.setItem('ps5_games', JSON.stringify(vals));
-    localStorage.setItem('ps5_games_confirmed', "true");
-    // Taymeri başlatmaq üçün cari vaxtı localStorage-a yaz
-    localStorage.setItem('ps5_tur_start', Date.now().toString());
-    closeModal();
-    infoMsg.innerText = "Təsdiqləndi! Oyunlar TUR səhifəsinə əlavə olundu və taymer başladı.";
-    infoMsg.style.display = "block";
-    confirmed = true;
-    games = vals;
-    fillTable();
-    confirmBtn.disabled = true;
-    
-    // Digər açıq səhifələrə dəyişikliyi bildir
-    window.dispatchEvent(new Event('storage'));
-};
+            let val = document.getElementById("secureInput").value;
+            if (val !== me.password) {
+                document.getElementById("modalError").innerText = "Şifrə yalnışdır!";
+                document.getElementById("modalError").style.display = "block";
+                return;
+            }
+            let vals = [];
+            table.querySelectorAll('tr').forEach((tr) => {
+                let inps = tr.querySelectorAll('.team-input');
+                vals.push([inps[0].value.trim(), inps[1].value.trim()]);
+            });
+            localStorage.setItem('ps5_games', JSON.stringify(vals));
+            localStorage.setItem('ps5_games_confirmed', "true");
+            // Taymeri başlatmaq üçün cari vaxtı localStorage-a yaz
+            localStorage.setItem('ps5_tur_start', Date.now().toString());
+            closeModal();
+            infoMsg.innerText = "Təsdiqləndi! Oyunlar TUR səhifəsinə əlavə olundu və taymer başladı.";
+            infoMsg.style.display = "block";
+            confirmed = true;
+            games = vals;
+            fillTable();
+            confirmBtn.disabled = true;
+            
+            // Digər açıq səhifələrə dəyişikliyi bildir
+            window.dispatchEvent(new Event('storage'));
+        };
 
+        document.getElementById("modalCancelBtn").onclick = closeModal;
     </script>
 </body>
 </html>
